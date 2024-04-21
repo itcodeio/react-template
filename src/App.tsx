@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
+import { routerMainConfig, routerExtraConfig } from './components/shared/routes/router';
+import StoreProvider from './components/shared/models/RootStoreProvider';
+import Popup from './components/shared/popups/popup';
+import './index.css';
 
-function App() {
+const router = createBrowserRouter([...routerMainConfig, ...routerExtraConfig]);
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider>
+      <Popup />
+      <RouterProvider router={router} />
+    </StoreProvider>
   );
 }
-
-export default App;
